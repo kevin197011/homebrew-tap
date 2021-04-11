@@ -1,7 +1,7 @@
-task :p do
-  sh <<~EOH
+task :push do
+  sh <<~SH
     git add .
     git commit -m 'Update.'
     git push origin main
-  EOH
+  SH
 end
