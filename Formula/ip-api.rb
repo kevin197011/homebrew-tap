@@ -6,7 +6,7 @@ class IpApi < Formula
   homepage "https://github.com/kevin197011"
   url "https://github.com/kevin197011/utils/raw/main/ip-api.tar.gz"
   version "0.0.1"
-  sha256 "bb9a473abdd843a2abf51aae65395fd5fa3fd69127f636bfca5b7f94a10b769c"
+  sha256 "b3080f284d82254135e173da51e38181c220179da3240160797a1fe366767da5"
   license "MIT"
 
 
