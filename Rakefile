@@ -26,7 +26,6 @@ task :update do
   @app_sha256 = context["sha256"]
   render = ERB.new(File.read("app.rb.erb"))
   File.open("Formula/#{@app_name}.rb", "w") { |file| file.write(render.result(binding)) }
-  # puts render.result(binding)
 end
 
 task :go do
