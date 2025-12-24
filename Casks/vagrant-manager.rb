@@ -17,14 +17,13 @@ cask "vagrant-manager" do
 
   app "Vagrant Manager.app"
 
-  preflight do
-    # Quit the app if it's running to avoid permission issues during installation
+  uninstall_preflight do
+    # Quit the app before uninstall to avoid permission issues
     system_command "/usr/bin/osascript",
                    args: ["-e", 'tell application "Vagrant Manager" to quit'],
                    sudo: false,
                    must_succeed: false
-    # Wait for the app to quit
-    sleep 2
+    sleep 1
   end
 
   uninstall delete: [
