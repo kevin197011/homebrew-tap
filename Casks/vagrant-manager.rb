@@ -28,6 +28,13 @@ cask "vagrant-manager" do
 
   app "Vagrant Manager.app"
 
+  postflight do
+    # Remove quarantine attributes to fix "damaged" error on macOS
+    system_command "/usr/bin/xattr",
+                   args: ["-cr", "#{appdir}/Vagrant Manager.app"],
+                   sudo: false
+  end
+
   zap trash: [
     "~/Library/Application Support/Vagrant Manager",
     "~/Library/Preferences/com.vagrantmanager.vagrantmanager.plist",
