@@ -1,35 +1,15 @@
 cask "vagrant-manager" do
-  version :latest
-  sha256 :no_check
+  version "2.8.1"
+  sha256 "331c619a34f23d586c3ffad7bc45ddeeee9f8d8ecf912bfb524da69978b194e4"
 
-  url do
-    require "open-uri"
-    require "json"
-    
-    api_url = "https://api.github.com/repos/kevin197011/vagrant-manager/releases/latest"
-    
-    begin
-      content = OpenURI.open_uri(api_url, "Accept" => "application/vnd.github.v3+json", "User-Agent" => "Homebrew").read
-      release_data = JSON.parse(content)
-      
-      dmg_asset = release_data["assets"]&.find { |asset| asset["name"]&.include?("arm64.dmg") }
-      
-      if dmg_asset && dmg_asset["browser_download_url"]
-        dmg_asset["browser_download_url"]
-      else
-        raise "ARM64 DMG asset not found in latest release"
-      end
-    rescue => e
-      raise "Failed to fetch release information: #{e.message}"
-    end
-  end
-
+  url "https://github.com/kevin197011/vagrant-manager/releases/download/v#{version}/vagrant-manager-#{version}-arm64.dmg",
+      verified: "github.com/kevin197011/vagrant-manager/"
   name "Vagrant Manager"
   desc "Manage your vagrant machines in one place with Vagrant Manager for macOS"
   homepage "https://github.com/kevin197011/vagrant-manager"
 
   livecheck do
-    url "https://github.com/kevin197011/vagrant-manager/releases/latest"
+    url :url
     strategy :github_latest
   end
 
