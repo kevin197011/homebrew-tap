@@ -8,9 +8,11 @@ kevin197011 工具的 Homebrew tap 仓库。
 # 添加 tap 仓库
 brew tap kevin197011/tap
 
-# 更新仓库
+# 更新仓库（获取最新版本）
 brew update
 ```
+
+**注意：** Homebrew 默认会在执行 `brew install` 或 `brew upgrade` 时自动更新 tap。如果遇到版本不是最新的情况，可以手动运行 `brew update` 来强制更新。
 
 ## 可用工具
 

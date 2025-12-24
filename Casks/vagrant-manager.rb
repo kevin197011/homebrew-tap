@@ -17,6 +17,27 @@ cask "vagrant-manager" do
 
   app "Vagrant Manager.app"
 
+  uninstall_preflight do
+    # Force quit the app before uninstall to avoid permission issues
+    # This ensures the app is closed even if uninstall quit: doesn't work
+    system_command "/usr/bin/osascript",
+                   args: ["-e", 'tell application "Vagrant Manager" to quit'],
+                   sudo: false,
+                   must_succeed: false
+    
+    # Wait for graceful quit (up to 5 seconds)
+    sleep 5
+    
+    # Force kill any remaining processes (safe to run even if app already quit)
+    system_command "/usr/bin/killall",
+                   args: ["-9", "Vagrant Manager"],
+                   sudo: false,
+                   must_succeed: false
+    
+    # Wait for processes to fully terminate and file locks to be released
+    sleep 2
+  end
+
   uninstall quit: "lanayo.Vagrant-Manager",
             delete: [
               "#{appdir}/Vagrant Manager.app",
