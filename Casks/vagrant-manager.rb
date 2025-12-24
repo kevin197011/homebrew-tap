@@ -17,6 +17,15 @@ cask "vagrant-manager" do
 
   app "Vagrant Manager.app"
 
+  preflight do
+    # Remove existing app if it exists to avoid conflicts
+    if File.exist?("#{appdir}/Vagrant Manager.app")
+      system_command "/bin/rm",
+                     args: ["-rf", "#{appdir}/Vagrant Manager.app"],
+                     sudo: false
+    end
+  end
+
   postflight do
     # Remove quarantine attributes to fix "damaged" error on macOS
     system_command "/usr/bin/xattr",
