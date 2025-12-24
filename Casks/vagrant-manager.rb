@@ -18,14 +18,13 @@ cask "vagrant-manager" do
   app "Vagrant Manager.app"
 
   preflight do
-    # Ensure clean installation by removing existing app if present
-    # This handles both manual installations and upgrade scenarios
-    app_path = "#{appdir}/Vagrant Manager.app"
-    if File.exist?(app_path)
-      system_command "/bin/rm",
-                     args: ["-rf", app_path],
-                     sudo: false
-    end
+    # Quit the app if it's running to avoid permission issues during installation
+    system_command "/usr/bin/osascript",
+                   args: ["-e", 'tell application "Vagrant Manager" to quit'],
+                   sudo: false,
+                   must_succeed: false
+    # Wait for the app to quit
+    sleep 2
   end
 
   uninstall delete: [
