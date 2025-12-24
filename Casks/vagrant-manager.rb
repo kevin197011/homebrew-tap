@@ -9,17 +9,15 @@ cask "vagrant-manager" do
     api_url = "https://api.github.com/repos/kevin197011/vagrant-manager/releases/latest"
     
     begin
-      open(api_url, "Accept" => "application/vnd.github.v3+json", "User-Agent" => "Homebrew") do |response|
-        release_data = JSON.parse(response.read)
-        
-        # Find the ARM64 DMG asset
-        dmg_asset = release_data["assets"]&.find { |asset| asset["name"]&.include?("arm64.dmg") }
-        
-        if dmg_asset && dmg_asset["browser_download_url"]
-          dmg_asset["browser_download_url"]
-        else
-          raise "ARM64 DMG asset not found in latest release"
-        end
+      content = OpenURI.open_uri(api_url, "Accept" => "application/vnd.github.v3+json", "User-Agent" => "Homebrew").read
+      release_data = JSON.parse(content)
+      
+      dmg_asset = release_data["assets"]&.find { |asset| asset["name"]&.include?("arm64.dmg") }
+      
+      if dmg_asset && dmg_asset["browser_download_url"]
+        dmg_asset["browser_download_url"]
+      else
+        raise "ARM64 DMG asset not found in latest release"
       end
     rescue => e
       raise "Failed to fetch release information: #{e.message}"
