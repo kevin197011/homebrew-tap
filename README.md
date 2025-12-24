@@ -1,36 +1,48 @@
 # homebrew-tap
 
-Homebrew tap repository for kevin197011 tools.
+kevin197011 工具的 Homebrew tap 仓库。
 
-## Installation
+## 安装
 
 ```bash
-# Add tap repository
+# 添加 tap 仓库
 brew tap kevin197011/tap
 
-# Update repository
+# 更新仓库
 brew update
 ```
 
-## Available Formulae
+## 可用工具
 
 ### krun
 
-A collection of shell scripts for system configuration and software installation.
+系统配置和软件安装的 shell 脚本集合。
 
-**Install:**
+**安装：**
 ```bash
 brew install kevin197011/tap/krun
 ```
 
-**Usage:**
+**使用：**
 ```bash
-# Check status
 krun status
-
-# krun will automatically download scripts from GitHub when needed
 ```
 
-**More information:**
-- Homepage: https://github.com/kevin197011/krun
-- Original install script: `curl -fsSL https://raw.githubusercontent.com/kevin197011/krun/main/install.sh | bash`
+**项目地址：** https://github.com/kevin197011/krun
+
+### vagrant-manager
+
+macOS 上的 Vagrant 虚拟机管理工具。
+
+**安装：**
+```bash
+brew install --cask kevin197011/tap/vagrant-manager
+```
+
+**系统要求：**
+- macOS 11.0 (Big Sur) 或更高版本
+- Apple Silicon (M1/M2/M3/M4/M5) 或 Intel Mac
+- 已安装 Vagrant 并在 PATH 中
+- VirtualBox 或 Parallels（如使用这些提供商）
+
+**项目地址：** https://github.com/kevin197011/vagrant-manager
