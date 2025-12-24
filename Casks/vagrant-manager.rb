@@ -18,13 +18,13 @@ cask "vagrant-manager" do
   app "Vagrant Manager.app"
 
   preflight do
-    # Remove existing app to allow overwrite installation
+    # Ensure clean installation by removing existing app if present
+    # This handles both manual installations and upgrade scenarios
     app_path = "#{appdir}/Vagrant Manager.app"
     if File.exist?(app_path)
       system_command "/bin/rm",
                      args: ["-rf", app_path],
-                     sudo: false,
-                     must_succeed: false
+                     sudo: false
     end
   end
 
