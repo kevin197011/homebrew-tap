@@ -1,6 +1,6 @@
 cask "vagrant-manager" do
-  version "2.8.3"
-  sha256 "58482cc66df1ada7d9b53d579cfd03dfd8cd9eb8dc3e00cddf4f018fb4000358"
+  version "2.8.6"
+  sha256 "d7990dc1f94d36f3ae9fb6c5e6a5a59ace41e34f44e7438a0872c5b401775c29"
 
   url "https://github.com/kevin197011/vagrant-manager/releases/download/v#{version}/vagrant-manager-#{version}-arm64.dmg",
       verified: "github.com/kevin197011/vagrant-manager/"
