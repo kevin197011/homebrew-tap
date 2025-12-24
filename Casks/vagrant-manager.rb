@@ -18,13 +18,19 @@ cask "vagrant-manager" do
   app "Vagrant Manager.app"
 
   preflight do
-    # Remove existing app if it exists to avoid conflicts
-    if File.exist?("#{appdir}/Vagrant Manager.app")
+    # Remove existing app to allow overwrite installation
+    app_path = "#{appdir}/Vagrant Manager.app"
+    if File.exist?(app_path)
       system_command "/bin/rm",
-                     args: ["-rf", "#{appdir}/Vagrant Manager.app"],
-                     sudo: false
+                     args: ["-rf", app_path],
+                     sudo: false,
+                     must_succeed: false
     end
   end
+
+  uninstall delete: [
+    "#{appdir}/Vagrant Manager.app",
+  ]
 
   postflight do
     # Remove quarantine attributes to fix "damaged" error on macOS
