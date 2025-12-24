@@ -17,18 +17,10 @@ cask "vagrant-manager" do
 
   app "Vagrant Manager.app"
 
-  uninstall_preflight do
-    # Quit the app before uninstall to avoid permission issues
-    system_command "/usr/bin/osascript",
-                   args: ["-e", 'tell application "Vagrant Manager" to quit'],
-                   sudo: false,
-                   must_succeed: false
-    sleep 1
-  end
-
-  uninstall delete: [
-    "#{appdir}/Vagrant Manager.app",
-  ]
+  uninstall quit: "lanayo.Vagrant-Manager",
+            delete: [
+              "#{appdir}/Vagrant Manager.app",
+            ]
 
   postflight do
     # Remove quarantine attributes to fix "damaged" error on macOS
